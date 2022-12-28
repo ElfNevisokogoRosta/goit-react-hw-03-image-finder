@@ -1,16 +1,14 @@
+import Form from './form/Form';
+import Gallery from './gallery/Gallery';
+import Modal from './modal/Modal';
+import Pagination from './pagination/Pagination';
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Form />
+      <Gallery />
+      <Modal />
+      <Pagination />
     </div>
   );
 };
