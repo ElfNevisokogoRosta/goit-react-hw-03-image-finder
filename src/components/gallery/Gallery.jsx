@@ -2,12 +2,11 @@ import GalleryItem from 'components/galleryItem/GalleryItem';
 import Loader from 'components/loader/Loader';
 import React, { Component } from 'react';
 import fetchImage from 'servises/imageAPI';
-
-import { List } from './Gallery.styled';
+import Button from 'components/button/Button';
+import { List, Text } from './Gallery.styled';
 class Gallery extends Component {
   constructor() {
     super();
-    this.clickHandler = this.clickHandler.bind(this);
     this.state = {
       res: [],
       status: 'idle',
@@ -39,6 +38,7 @@ class Gallery extends Component {
           this.state.pageNumber
         );
         const { hits, totalHits } = images;
+        this.props.toast(`We found ${totalHits} images`);
         this.setState({
           res: [...hits],
           totalHits: totalHits,
@@ -68,14 +68,20 @@ class Gallery extends Component {
     }
   }
 
-  clickHandler() {
+  onClick = () => {
     this.setState(prevState => ({
       pageNumber: prevState.pageNumber + 1,
     }));
-  }
+  };
   render() {
     const { res, status, error, totalHits } = this.state;
-
+    if (status === 'idle') {
+      return (
+        <div className="container">
+          <Text>Find some images</Text>
+        </div>
+      );
+    }
     if (status === 'loading') {
       return (
         <div className="container">
@@ -94,11 +100,9 @@ class Gallery extends Component {
       return (
         <div className="container">
           <List>
-            <GalleryItem data={res} />
+            <GalleryItem data={res} imageHandler={this.props.imageHandler} />
           </List>
-          {res.length < totalHits ? (
-            <button onClick={this.clickHandler}>Load more</button>
-          ) : null}
+          {res.length < totalHits ? <Button onClick={this.onClick} /> : null}
         </div>
       );
     }

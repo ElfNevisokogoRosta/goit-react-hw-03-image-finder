@@ -22,3 +22,7 @@ code {
   display: flex;
   justify-content: center;
 }
+.loader-wrpaper{
+  display: flex;
+  justify-content: center;
+}

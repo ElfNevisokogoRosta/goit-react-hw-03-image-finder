@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { Button, Header, Input } from './Form.styled';
+import { ButtonForm, Header, Input } from './Form.styled';
 class Form extends Component {
   constructor() {
     super();
@@ -32,9 +32,9 @@ class Form extends Component {
               autoFocus
               placeholder="Search images and photos"
             />
-            <Button>
+            <ButtonForm>
               <FiSearch size={`24px`} vertical-align={`middle`} />
-            </Button>
+            </ButtonForm>
           </form>
         </div>
       </Header>

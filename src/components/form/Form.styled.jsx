@@ -14,7 +14,7 @@ const Input = styled.input`
   padding-left: 14px;
   font-size: 18px;
 `;
-const Button = styled.button`
+const ButtonForm = styled.button`
   margin-left: 10px;
   width: 40px;
   height: 40px;
@@ -22,5 +22,6 @@ const Button = styled.button`
   border-radius: 6px;
   padding: 0;
   transform: translateY(4px);
+  cursor: pointer;
 `;
-export { Header, Input, Button };
+export { Header, Input, ButtonForm };
