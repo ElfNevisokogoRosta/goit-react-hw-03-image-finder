@@ -1,5 +1,8 @@
 import axios from 'axios';
 export default async function fetchImage(searchQuery, pageNumber) {
+  if (searchQuery === '') {
+    return;
+  }
   const response = await axios({
     method: 'GET',
     url: 'https://pixabay.com/api/',
@@ -12,5 +15,17 @@ export default async function fetchImage(searchQuery, pageNumber) {
       image_type: 'photo',
     },
   });
-  return response.data;
+  const hits = response.data.hits.map(image => {
+    return {
+      id: image.id,
+      largeImageURL: image.largeImageURL,
+      previewURL: image.webformatURL,
+      tags: image.tags,
+    };
+  });
+  const responceObj = {
+    total: response.data.totalHits,
+    hits: hits,
+  };
+  return responceObj;
 }

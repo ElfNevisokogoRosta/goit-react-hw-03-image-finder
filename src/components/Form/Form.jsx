@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { ButtonForm, Header, Input } from './Form.styled';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 class Form extends Component {
-  constructor() {
-    super();
-    this.inputHandler = this.inputHandler.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.state = {
-      q: '',
-    };
-  }
-  inputHandler(e) {
+  state = {
+    q: '',
+  };
+
+  inputHandler = e => {
     this.setState({
       q: e.target.value.trim(),
     });
-  }
-  onFormSubmit(e) {
+  };
+  onFormSubmit = e => {
     e.preventDefault();
+    if (this.state.q === '') {
+      return toast.error('Search query is empty');
+    }
     this.props.onSubmit(this.state.q);
-  }
+  };
   render() {
     return (
       <Header>
@@ -41,5 +42,8 @@ class Form extends Component {
     );
   }
 }
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Form;
